@@ -16,7 +16,7 @@ export const All=()=>{
     return(
         <div className="product-list">
           {items.map((item,i)=>{
-               return <Items key={i} id={item.id} price={item.price} name={item.name} image={item.imageUrl} category={item.Category} action="Add to Cart"/>
+               return <Items key={i} id={item.id} price={item.price} name={item.name} image={item.imageUrl} category={item.category} action="Add to Cart"/>
               })}
           </div>
 )

@@ -47,7 +47,7 @@ const Items=(props)=>{
     return(
       
         <>
-          <div className="card" style={{ width: "18rem",height:"23rem" }}>
+          <div className="card" style={{ width: "18rem",height:"26rem" }}>
             <img src={props.image} className="card-img-top" alt="..." />
             <div className="card-body">
                 <h5 className="card-text">{props.name}</h5>
