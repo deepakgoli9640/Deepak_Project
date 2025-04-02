@@ -7,7 +7,10 @@ import Quantity from 'C:/Users/deepa/OneDrive/Desktop/karthik/frontend/src/Compo
  import {useState} from 'react';
  import karpuram from 'C:/Users/deepa/OneDrive/Desktop/karthik/frontend/src/Components/Assets/karpuram.png';
 import Items from './Items.jsx';
-import {All,Update,Add,Delete} from './All';
+import {All} from './All';
+import {Delete} from '../Components/Admin/Delete';
+import {Update} from '../Components/Admin/Update';
+import {Add} from '../Components/Admin/Add';
 const Admin=()=>{
     const[active,setActive]=useState("all");
 
