@@ -14,7 +14,7 @@ export const Delete=()=>{
 return(
   <div className="product-list">
     {items.map((item,i)=>{
-         return <Items key={i} id={item.id} price={item.price} name={item.name} image={item.imageUrl} category={item.category} action="Delete" setItems={setItems}/>
+         return <Items key={i} id={item.id} price={item.price} name={item.name} image={item.imageUrl} category={item.category} action="Delete" setItems={setItems} quality={item.quality}/>
         })}
     </div>
 )

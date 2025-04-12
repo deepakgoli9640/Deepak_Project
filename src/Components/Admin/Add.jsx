@@ -8,12 +8,13 @@ export const Add = () => {
      const[values,setValues]=useState({
          name:'',
          imageUrl:'',
-         category:'',
-         price:''
+         category:'select',
+         price:'',
+         quality:''
          })
          const handleChange = (e) => {
           setValues((prevValues) => ({
-              ...prevValues,
+              ...prevValues,  
               [e.target.name]: e.target.value
           }));
       };
@@ -38,7 +39,7 @@ export const Add = () => {
       
           if (response.ok) {
             alert("Product added successfully!");
-            setValues({ name: '', price: '', imageUrl: '', category: '' }); // Reset form
+            setValues({ name: '', price: '', imageUrl: '', category: '',quality:'' }); // Reset form
           } else {
             alert("Failed to add product.");
           }
@@ -60,8 +61,15 @@ export const Add = () => {
                         <label htmlFor="category">category</label>
                         <select name="category" id="category" onChange={(e)=>handleChange(e)} value={values.category} required>
                             <option value="select" selected>select</option>
-                            <option value="price in grams">price in grams</option>
+                            <option value="price per 50 grams">price per 50 grams</option>
                             <option value="price per item">price per item</option>
+                            <option value="size">price based on size</option>
+                        </select>
+                        <label htmlFor="quality">Quality</label>
+                        <select name="quality" id="quality" onChange={(e)=>handleChange(e)} value={values.quality} required>
+                            <option value="select" selected>select</option>
+                            <option value="1st quality">1ST Quality</option>
+                            <option value="2nd quality">2nd Quality</option>
                         </select>
 
                         <label htmlFor="price">Price</label>

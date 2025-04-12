@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap
+import "./cart.css";
 
 const Cart = () => {
   // Sample cart items
@@ -52,8 +53,8 @@ const Cart = () => {
   );
 
   return (
-    <div className="container mt-4">
-      <h2 className="mb-4">Shopping Cart</h2>
+    <div className="container mt-9">
+    
       {cartItems.length === 0 ? (
         <p>Your cart is empty</p>
       ) : (
@@ -61,7 +62,7 @@ const Cart = () => {
           <div key={item.id} className="card mb-3 p-3">
             <div className="row align-items-center">
               <div className="col-md-2">
-                <img src={item.image} alt={item.name} className="img-fluid" />
+                <img src="https://plus.unsplash.com/premium_photo-1672076780330-ae81962ee3ce?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dHVybWVyaWN8ZW58MHx8MHx8fDA%3D" alt={item.name} className="img-fluid" />
               </div>
               <div className="col-md-3">
                 <h5>{item.name}</h5>
@@ -78,13 +79,12 @@ const Cart = () => {
                 <button
                   className="btn btn-outline-primary ms-2"
                   onClick={() => increaseQuantity(item.id)}
-                >
-                  +
+                >X
                 </button>
               </div>
-              <div className="col-md-2">
+              <div className="col-md-4">
                 <button
-                  className="btn btn-danger"
+                  className="button"
                   onClick={() => removeItem(item.id)}
                 >
                   🗑 Remove

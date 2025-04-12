@@ -1,28 +1,32 @@
 import React, { useState } from "react";
 import "./Items.css";
+import badge1 from './ItemAssests/quality.png';
 
 const Items = (props) => {
   const [update, setUpdate] = useState({}); // Tracks if input field is shown
   const [newPrice, setNewPrice] = useState(props.price); // Stores new price
-
   const handleClick = (id) => {
     setUpdate((prevState) => ({
       ...prevState,
       [id]: !prevState[id], // Toggle input field visibility
     }));
+    setNewPrice(props.price);
   };
 
   const handleModify = async (id) => {
-    if (!newPrice.trim()) {
+    if (parseFloat(newPrice) === parseFloat(props.price)) {
+      alert("price not changed");
+      props.setReload(prev => !prev);
       return;
     }
+  
+        
     const updatedProduct = {
-      id: props.id,
-      name: props.name,
-      category: props.category,
+      name:props.name,
       price: newPrice,
-      imageUrl: props.image
-      // add any other fields if needed
+      category:props.category,
+      quality:props.quality,
+      imageUrl:props.image,
     };
   
 
@@ -43,12 +47,14 @@ const Items = (props) => {
         const data = await res.json();
         setUpdate((prevState) => ({ ...prevState, [id]: false}));
         props.setItems(data);  // Hide input field after update
-      } else {
+      }
+      else {
         alert("Failed to update price.");
       }
     } catch (error) {
       console.error("Error updating price:", error);
     }
+    props.setReload(prev => !prev);
   };
 
   const handleDelete = async (id) => {
@@ -77,10 +83,21 @@ const Items = (props) => {
   return (
     <div className="card" style={{ width: "18rem", height: "28rem" }}>
       <img src={props.image} className="card-img-top" alt={props.name} />
+      {props.quality==='1st quality' &&(
+      <img
+    src={badge1}
+    alt="badge"
+    style={{
+      position: "absolute",
+      top: "10px",
+      right: "10px",
+      height: "50px",
+      display:"block",
+    }}
+  />)}
       <div className="card-body">
         <h5 className="card-text">{props.name}</h5>
         <h6 className="card-title">{props.category} : ₹{newPrice}</h6>
-
         {update[props.id] && (
           <input
             type="number"
@@ -89,13 +106,13 @@ const Items = (props) => {
             onChange={(e) => setNewPrice(e.target.value)}
           />
         )}
-
+      
         <div className="cardButton">
           <button
             className="button"
             onClick={() => {
-              if (props.action === "Modify Price") {
-                if (update[props.id] && newPrice.trim()) {
+              if (props.action ==="Modify") {
+                if (update[props.id] && newPrice) {
                   handleModify(props.id); // Second click updates price
                 } else {
                   handleClick(props.id); // First click shows input field
@@ -105,11 +122,19 @@ const Items = (props) => {
               } else if (props.action === "Add to Cart") {
                 console.log("Added to Cart", props.id);
               }
-            }}
-          >
+            }} >
+        
             {props.action}
           </button>
-        </div>
+          {update[props.id] && <div className='cardButton'> 
+            <button
+                  className="btn btn-outline-primary ms-2" onClick={()=>handleClick(props.id)}
+                >
+                  close
+          </button>
+            </div>
+                }
+       </div>
       </div>
     </div>
   );
