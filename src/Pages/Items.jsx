@@ -130,7 +130,7 @@ const Items = (props) => {
             <button
                   className="btn btn-outline-primary ms-2" onClick={()=>handleClick(props.id)}
                 >
-                  close
+                cancel
           </button>
             </div>
                 }
