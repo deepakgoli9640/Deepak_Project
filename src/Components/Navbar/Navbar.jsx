@@ -4,9 +4,14 @@ import logo from '../Assets/Home_icon.png';
 import { useState } from 'react';
 import {Link} from 'react-router-dom';
 import {useRef} from 'react';
-
+import Items from "../../Pages/Items";
 const Navbar = () => {
         const [links, setLinks] = useState("admin");
+        const [search,setSearch]=useState('disabled');
+        const handleSearch=(e)=>{
+                setSearch(e.target.value);
+        };
+        
         return (
        <div className="navbar">
            <div className="navbar-logo">
@@ -21,11 +26,11 @@ const Navbar = () => {
                 <li onClick={()=>setLinks("bill")}><Link style={{textDecoration:'none',color:'Black'}}to="/bill">Bill</Link>{links==="bill"?<hr/>:<></>}</li>
            </ul>
           <div className="navbar-search">
-                <input type="text" placeholder="Search"/>
+                <input type="text" placeholder="Search" onChange={(e)=>handleSearch(e)}/>
                 <button>Search</button>
             </div>
        </div>
     );
-    }
+}
 
 export default Navbar;

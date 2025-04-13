@@ -2,8 +2,9 @@
 
 const Bill=()=>{
     return(
-        <div>
-            <h1>Deepak</h1>
+        <div className="comingsoon"><center>
+            <h1>Coming Soon....</h1>
+            </center>
         </div>
         );
     }

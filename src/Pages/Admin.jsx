@@ -1,11 +1,9 @@
  import React from 'react';
  import './admin.css';
 import {useEffect} from 'react';
-import Quantity from 'C:/Users/deepa/OneDrive/Desktop/karthik/frontend/src/Components/Admin/Quantity.jsx';
  import{Link} from  'react';
  import Data from './Data.json';
  import {useState} from 'react';
- import karpuram from 'C:/Users/deepa/OneDrive/Desktop/karthik/frontend/src/Components/Assets/karpuram.png';
 import Items from './Items.jsx';
 import {All} from './All';
 import {Delete} from '../Components/Admin/Delete';
