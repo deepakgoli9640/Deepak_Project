@@ -5,6 +5,12 @@
   font-weight: bold;
   font-size: 36px;
 }
+.shopify{
+    font-family: 'Poppins', sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 25px;
+}
 .navbar{
 
 display: flex;
@@ -60,7 +66,7 @@ display: flex;
     .navbar-cart-count{
         display:flex ;
         width: 22px;
-        height: 22px;
+        height: 18px;
         border-radius: 11px;
         background-color: red;
         color: white;
@@ -69,7 +75,7 @@ display: flex;
         justify-content: center;
         align-items: center;
         margin-left: -60px;
-        margin-top: -30px;
+        margin-top: -26px;
     }
     .navbar-links li{
         list-style:none;
@@ -88,8 +94,9 @@ display: flex;
         border:none;
         height: 3px;
         width: 80%;
-        background:#000000;
+        background:red;
         border-radius: 10px;
+        margin-top:-13px;
     }
     .navbar-search{
         display:flex;
