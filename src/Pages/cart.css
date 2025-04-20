@@ -2,6 +2,14 @@
     display:flex;
     justify-content:center;
     margin-top:10px;
-   border-radius:1000px;
 
+}
+.proceed{
+    margin-top:20px;
+    gap:10px;   
+}
+.Deepak{
+    display:flex;
+    justify-content:center;
+    flex-direction:row;
 }

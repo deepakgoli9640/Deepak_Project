@@ -12,13 +12,22 @@ const Cart = () => {
       ...prevQuantity,
       [id]:newQuantity,
     }));
+    
     };
   
  
   useEffect(() => {
-    fetch("http://localhost:8080/cart/") // Fetching from backend
+    fetch("http://localhost:8080/cart/") 
         .then((response) => response.json())
-        .then((data) => setCartItems(data))
+        .then((data) => {
+          setCartItems(data);
+
+        const initialQuantities = {};
+        data.forEach(item => {
+          initialQuantities[item.cart_id] = item.cart_quantity;
+        });
+        setQuantity(initialQuantities);
+          })
         .catch((error) => console.error("Error fetching items:", error));
     }, []);
     const handleDelete=async(id)=>
@@ -45,6 +54,8 @@ const Cart = () => {
       }
     };
 
+    
+
   return (
     <div className='table'>
     <div className="flex justify-center mt-10">
@@ -55,7 +66,8 @@ const Cart = () => {
           <th className="border border-gray-300 px-4 py-2">Product ID</th>
           <th className="border border-gray-300 px-4 py-2">Product Name</th>
           <th className="border border-gray-300 px-4 py-2">Quantity</th>
-          <th className="border border-gray-300 px-4 py-2">Price</th>
+          <th className="border border-gray-300 px-4 py-2">Category</th>
+          <th className="border border-gray-300 px-4 py-2">Unit price</th>
           <th className="border border-gray-300 px-4 py-2">Total</th>
           <th className="border border-gray-300 px-4 py-2">Action</th>
         </tr>
@@ -65,13 +77,23 @@ const Cart = () => {
           <tr key={item.cart_id}>
             <td className="border border-gray-300 px-4 py-2">{index+1}</td>
             <td className="border border-gray-300 px-4 py-2">{item.name}</td>
-            <td className="border border-gray-300 px-4 py-2"><input type='number' 
-            value={quantity[item.cart_id] || item.cart_quantity}
+            <td className="border border-gray-300 px-4 py-2">
+              <div className="Deepak">
+              <input 
+               type='text' 
+            placeholder="Enter Quantity"
+            value={quantity[item.cart_id]}
             onChange={(e)=>handleChangeQuantity(item.cart_id,e.target.value)}/>
+            {item.category==='price per 50 grams' &&
+            <span style={{marginTop:"13px",marginLeft:"2px"}}>
+            gm
+            </span>}
+              </div>
             </td>
+            <td className="border border-gray-300 px-4 py-2">{item.category || "N/A"}</td>
             <td className="border border-gray-300 px-4 py-2">₹{item.price}</td>
             <td className="border border-gray-300 px-4 py-2">₹
-              {(quantity[item.cart_id] || item.cart_quantity) * item.price}</td>
+              {((quantity[item.cart_id]) * item.price).toFixed(2)}</td>
             <td className="border border-gray-300 px-4 py-2">
             <button
                   className="button"
@@ -86,6 +108,16 @@ const Cart = () => {
       </tbody>
     </table>
   </div>
+  <h4 className="proceed">Total: {cartItems.reduce(
+      (total,item)=>total+item.price*(quantity[item.cart_id]),0
+    )}</h4>
+      <button
+        className="btn btn-success mt-4"
+        disabled={cartItems.length === 0}
+  
+      >
+        Proceed to Checkout
+      </button>
 </div>
 </div>
   )

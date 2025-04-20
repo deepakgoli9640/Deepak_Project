@@ -20,6 +20,7 @@ const Items = (props) => {
           name:props.name,
           price:props.price,
           cart_quantity:newQuantity,
+          category:props.category,
           product_id:id,
         };
         try {
