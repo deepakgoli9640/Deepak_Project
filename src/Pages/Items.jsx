@@ -4,50 +4,23 @@ import badge1 from './ItemAssests/quality.png';
 
 const Items = (props) => {
   const [update, setUpdate] = useState({}); // Tracks if input field is shown
-  const [newPrice, setNewPrice] = useState(props.price); 
-  const [newQuantity,setNewQuantity]=useState(0);// Stores new price
-
-
+  const [newPrice, setNewPrice] = useState(props.price); // Stores new price
   const handleClick = (id) => {
-      setUpdate((prevState) => ({ 
-        ...prevState,
-        [id]: !prevState[id], // Toggle input field visibility
-      }));
-      setNewPrice(props.price); // Set new price
-    }
-    const handleModifyCart=async(id)=>{
-        const updatedCart={
-          name:props.name,
-          price:props.price,
-          cart_quantity:newQuantity,
-          category:props.category,
-          product_id:id,
-        };
-        try {
-          const response = await fetch("http://localhost:8080/cart/add",{
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(updatedCart),
-          });
-    
-          if (response.ok) {
-            alert("Item added to Cart");
-          }
-          else {
-            alert("Failed to add Item to Cart.");
-          }
-        } catch (error) {
-          console.error("failed to add Item:", error);
-        }
-      };
-    
+    setUpdate((prevState) => ({
+      ...prevState,
+      [id]: !prevState[id], // Toggle input field visibility
+    }));
+    setNewPrice(props.price);
+  };
 
   const handleModify = async (id) => {
     if (parseFloat(newPrice) === parseFloat(props.price)) {
-      alert("press cancel if you dont want to modify price");
+      alert("price not changed");
       props.setReload(prev => !prev);
       return;
-    };
+    }
+  
+        
     const updatedProduct = {
       name:props.name,
       price: newPrice,
@@ -120,30 +93,19 @@ const Items = (props) => {
       right: "10px",
       height: "50px",
       display:"block",
-       }}
-      />)}
+    }}
+  />)}
       <div className="card-body">
         <h5 className="card-text">{props.name}</h5>
         <h6 className="card-title">{props.category} : ₹{newPrice}</h6>
-        {props.action === 'Modify' ? (
-          update[props.id] && (
-         <input
-          type="number"
-          placeholder="Enter updated price"
-          value={newPrice}
-          onChange={(e) => setNewPrice(e.target.value)}
-         />
-          )
-           ) : (
-        update[props.id] && (
+        {update[props.id] && (
           <input
-        type="number"
-        placeholder="Enter Quantity"
-         value={newQuantity}
-        onChange={(e) => setNewQuantity(e.target.value)}
-           />
-           )
-         )} 
+            type="number"
+            placeholder="Enter new price"
+            value={newPrice}
+            onChange={(e) => setNewPrice(e.target.value)}
+          />
+        )}
       
         <div className="cardButton">
           <button
@@ -155,18 +117,12 @@ const Items = (props) => {
                 } else {
                   handleClick(props.id); // First click shows input field
                 }
-              } else if (props.action === "Delete") { 
+              } else if (props.action === "Delete") {
                 handleDelete(props.id);
-              } else if (props.action === "Add") {
-                  if(update[props.id] && newQuantity){
-                     handleModifyCart(props.id);
-                  }
-                  else
-                  {
-                    handleClick(props.id);
-                  }
+              } else if (props.action === "Add to Cart") {
+                console.log("Added to Cart", props.id);
               }
-            }}>
+            }} >
         
             {props.action}
           </button>
@@ -181,6 +137,7 @@ const Items = (props) => {
        </div>
       </div>
     </div>
-  )
+  );
 };
+
 export default Items;
