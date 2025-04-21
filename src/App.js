@@ -13,9 +13,9 @@ function App() {
     <BrowserRouter>
      <Navbar/>
      <Routes>
-      <Route path='/home'  element={<Home/>}/>
+      <Route path='/'  element={<Home/>}/>
      <Route path='/admin' element={<Admin/>}/>
-     <Route path='/' element={<Cart/>}/>
+     <Route path='/cart' element={<Cart/>}/>
      <Route path='/bill'  element={<Bill/>}/>
      </Routes>
     </BrowserRouter>

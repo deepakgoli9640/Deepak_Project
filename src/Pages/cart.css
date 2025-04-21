@@ -1,3 +1,15 @@
-.button{
-   width:100px;
+.table{
+    display:flex;
+    justify-content:center;
+    margin-top:10px;
+
+}
+.proceed{
+    margin-top:20px;
+    gap:10px;   
+}
+.Deepak{
+    display:flex;
+    justify-content:center;
+    flex-direction:row;
 }
